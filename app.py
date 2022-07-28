@@ -1,7 +1,7 @@
 import json
 
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, make_response
 app = Flask(__name__)
 
 
@@ -44,7 +44,13 @@ def mocktest():
 #     "Delivery_Date": "2006-12-31T13:30:00",
 #     "Value": 15.24
 #   }]
-    return json.dumps([{"DataSetId":1090898,"Id":560881,"Saved_Date":"2021-06-30T20:08:07.680399","Published_Date":"2021-06-30T18:07:52.715111","Delivery_Date":"2006-12-31T13:00:00","Value":14.95},{"DataSetId":1090898,"Id":560882,"Saved_Date":"2021-06-30T20:08:07.680399","Published_Date":"2021-06-30T18:07:52.715111","Delivery_Date":"2006-12-31T14:00:00","Value":15.24}])
+    responseText = json.dumps([{"DataSetId":1090898,"Id":560881,"Saved_Date":"2021-06-30T20:08:07.680399","Published_Date":"2021-06-30T18:07:52.715111","Delivery_Date":"2006-12-31T13:00:00","Value":14.95},{"DataSetId":1090898,"Id":560882,"Saved_Date":"2021-06-30T20:08:07.680399","Published_Date":"2021-06-30T18:07:52.715111","Delivery_Date":"2006-12-31T14:00:00","Value":15.24}])
+    response = make_response(responseText, 200)
+    response.mimetype = "application/json"
+    return response
+
+
+
 
 if __name__ == '__main__':
    app.run()
